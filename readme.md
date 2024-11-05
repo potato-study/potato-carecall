@@ -1,4 +1,4 @@
-# Carecall-Helloworld (NEST + OPENAI)
+# Function Call을 이해해 보자
 
 ## Introduction
 PortAudio를 통해 마이크로 입력을 받아들이고, NEST를 통해 STT를 수행하고, OPENAI를 통해 대화를 수행하는 프로젝트입니다.
