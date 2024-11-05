@@ -1,0 +1,20 @@
+{
+  "additional_symptoms": "열이 조금 나는 것",
+  "advice": "규칙적인 식사와 건강한 식습관을 유지하며, 고혈압 약을 꾸준히 복용하세요. 흡연을 줄이거나 끊는 것을 고려해보세요.",
+  "initial_diagnosis": "좌측 편두통 및 고혈압 관련 증상",
+  "lifestyle": {
+    "alcohol": false,
+    "diet": "라면 위주의 식사",
+    "exercise": "규칙적으로 운동 중",
+    "smoking": true
+  },
+  "main_symptoms": "왼쪽 머리 통증",
+  "medical_history": "고혈압으로 약 복용 중",
+  "patient_info": {
+    "age": 0,
+    "gender": "unknown",
+    "name": "배 성국"
+  },
+  "reason": "환자가 상담을 종료하였음",
+  "recommended_tests": "혈압 체크 및 두통의 원인 분석 위한 적절한 검사 권장"
+}
