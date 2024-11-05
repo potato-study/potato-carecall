@@ -5,6 +5,8 @@ import (
 	"os"
 )
 
+var functionSpecs = GetFunctionSpec()
+
 func PromptMessage() Message {
 	content, err := os.ReadFile("prompt")
 	if err != nil {

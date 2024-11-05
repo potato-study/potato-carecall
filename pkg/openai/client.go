@@ -9,11 +9,11 @@ import (
 	"potato-carecall/pkg/config"
 )
 
-func Request(messages []Message, functions []FunctionSpec) (*ResponseBody, error) {
+func Request(messages []Message) (*ResponseBody, error) {
 	requestBodyBytes, err := json.Marshal(RequestBody{
 		Model:               config.OpenaiModel,
 		Messages:            messages,
-		Functions:           functions,
+		Functions:           functionSpecs,
 		FunctionCallSetting: "auto",
 	})
 	if err != nil {

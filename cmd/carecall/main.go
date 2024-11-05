@@ -13,21 +13,26 @@ import (
 const maxTurns = 10
 
 func main() {
-	initializePortAudio()
+	// 녹음 장치 초기화
+	if err := portaudio.Initialize(); err != nil {
+		log.Fatalf("Failed to initialize PortAudio: %v", err)
+	}
 	defer portaudio.Terminate()
-
-	messages := []openai.Message{openai.PromptMessage()}
-	functions := openai.GetFunctionSpec()
 
 	if err := recorder.InitRecordDevice(); err != nil {
 		panic(err)
 	}
 
+	// 대화 메시지 초기화
+	messages := []openai.Message{openai.PromptMessage()}
+
+	// 함수 명세 가져오기
+
 	fmt.Printf("\n\n ===== %d번째 대화 =====\n", 0)
 	showWelcomeMessage()
 
 	for turns := 0; turns < maxTurns; turns++ {
-		if err := processTurn(&messages, functions); errors.Is(err, openai.ErrEndConversation) {
+		if err := processTurn(&messages); errors.Is(err, openai.ErrEndConversation) {
 			log.Println("finished conversation")
 			break
 		} else if err != nil {
@@ -39,23 +44,16 @@ func main() {
 	log.Println("대화를 종료합니다.")
 }
 
-// PortAudio 초기화
-func initializePortAudio() {
-	if err := portaudio.Initialize(); err != nil {
-		log.Fatalf("Failed to initialize PortAudio: %v", err)
-	}
-}
-
-func processTurn(messages *[]openai.Message, functions []openai.FunctionSpec) error {
+func processTurn(messages *[]openai.Message) error {
+	// 오디오 녹음
 	wavData, err := recorder.RecordAudio()
 	if err != nil {
 		return fmt.Errorf("error recording audio: %v", err)
 	}
 
 	client := nestclient.NewSTTClient()
-	client.Params["assessment"] = "false"
-	client.Params["utterance"] = "안녕하세요."
-	client.Params["graph"] = "false"
+	client.Params["assessment"] = "false" // 발음평가
+	client.Params["graph"] = "false"      // 그래프
 
 	userInput, err := client.Recognize(wavData)
 	if err != nil {
@@ -67,7 +65,7 @@ func processTurn(messages *[]openai.Message, functions []openai.FunctionSpec) er
 	printMessages("환자", userMessage)
 
 	fmt.Printf("\n\n====%d====================\n", len(*messages))
-	response, err := openai.Request(*messages, functions)
+	response, err := openai.Request(*messages)
 	if err != nil {
 		return fmt.Errorf("error sending request to OpenAI: %v", err)
 	}

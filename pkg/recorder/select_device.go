@@ -7,6 +7,7 @@ import (
 
 var selectedDeviceID = -1
 
+// 입력 장치 선택
 func InitRecordDevice() error {
 	if selectedDeviceID >= 0 {
 		return nil
