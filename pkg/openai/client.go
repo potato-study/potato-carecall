@@ -10,12 +10,15 @@ import (
 )
 
 func Request(messages []Message) (*ResponseBody, error) {
-	requestBodyBytes, err := json.Marshal(RequestBody{
+	request := RequestBody{
 		Model:               config.OpenaiModel,
 		Messages:            messages,
-		Functions:           functionSpecs,
+		Functions:           loadFunctions(),
 		FunctionCallSetting: "auto",
-	})
+	}
+
+	requestBodyBytes, err := json.Marshal(request)
+
 	if err != nil {
 		return nil, fmt.Errorf("error marshalling request body: %v", err)
 	}

@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "properties": {
+    "reason": {
+      "type": "string",
+      "description": "긴급 신고를 요청하는 이유"
+    },
+    "callNumber": {
+      "type": "string",
+      "description": "긴급 신고 전화번호 - 대한민국"    }
+  },
+  "required": [
+    "reason",
+    "callNumber"
+  ]
+}

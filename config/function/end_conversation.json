@@ -1,0 +1,83 @@
+{
+  "type": "object",
+  "properties": {
+    "patient_info": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "환자의 이름"
+        },
+        "age": {
+          "type": "integer",
+          "description": "환자의 나이"
+        },
+        "gender": {
+          "type": "string",
+          "description": "환자의 성별"
+        }
+      },
+      "required": ["name", "age", "gender"]
+    },
+    "main_symptoms": {
+      "type": "string",
+      "description": "환자가 호소하는 주요 증상"
+    },
+    "medical_history": {
+      "type": "string",
+      "description": "환자의 과거 병력"
+    },
+    "additional_symptoms": {
+      "type": "string",
+      "description": "환자의 추가 증상"
+    },
+    "lifestyle": {
+      "type": "object",
+      "properties": {
+        "diet": {
+          "type": "string",
+          "description": "식습관"
+        },
+        "smoking": {
+          "type": "boolean",
+          "description": "흡연 여부"
+        },
+        "alcohol": {
+          "type": "boolean",
+          "description": "음주 여부"
+        },
+        "exercise": {
+          "type": "string",
+          "description": "운동 빈도"
+        }
+      }
+    },
+    "initial_diagnosis": {
+      "type": "string",
+      "description": "초기 진단"
+    },
+    "recommended_tests": {
+      "type": "string",
+      "description": "추가로 추천되는 검사"
+    },
+    "advice": {
+      "type": "string",
+      "description": "환자를 위한 추가 조언"
+    },
+    "reason": {
+      "type": "string",
+      "description": "대화를 종료하려는 이유"
+    }
+  },
+  "required": [
+    "patient_info",
+    "main_symptoms",
+    "medical_history",
+    "additional_symptoms",
+    "lifestyle",
+    "initial_diagnosis",
+    "recommended_tests",
+    "advice",
+    "reason"
+  ]
+}
