@@ -159,7 +159,7 @@ func Request(messages []Message) (*ResponseBody, error) {
 - `openai.loadFunctions` 함수를 통해 function call을 처리할 수 있는 함수 목록을 로드합니다.
 - 환자의 정보를 저장하고, 대화를 종료하는 함수입니다. OpenAI의 응답을 통해 function call을 수행합니다.
 
-`/config/function/end_conversation.go`
+`/config/function/end_conversation.json`
 ```json
 {
   "type": "object",
