@@ -7,16 +7,49 @@ import (
 	"os"
 )
 
+type PatientInfo struct {
+	Name   string `json:"name"`
+	Age    int    `json:"age"`
+	Gender string `json:"gender"`
+}
+
+type Lifestyle struct {
+	Diet     string `json:"diet"`
+	Smoking  bool   `json:"smoking"`
+	Alcohol  bool   `json:"alcohol"`
+	Exercise string `json:"exercise"`
+}
+
+type EndConversationParams struct {
+	PatientInfo        PatientInfo `json:"patient_info"`
+	MainSymptoms       string      `json:"main_symptoms"`
+	MedicalHistory     string      `json:"medical_history"`
+	AdditionalSymptoms string      `json:"additional_symptoms"`
+	Lifestyle          Lifestyle   `json:"lifestyle"`
+	InitialDiagnosis   string      `json:"initial_diagnosis"`
+	RecommendedTests   string      `json:"recommended_tests"`
+	Advice             string      `json:"advice"`
+	Reason             string      `json:"reason"`
+}
+
 func HandleFunctionCall(functionCall FunctionCallResponse) error {
 	switch functionCall.Name {
-	case "medical_interview":
-		return handleFunction("medical_interview", functionCall.Arguments, "medical_interview.json")
 	case "end_conversation":
+		var params EndConversationParams
+		if err := json.Unmarshal([]byte(functionCall.Arguments), &params); err != nil {
+			log.Printf("Failed to unmarshal arguments: %v", err)
+			return err
+		}
+		// Use the params object as needed
+		fmt.Printf("Function call: %s, \nParams: %+v\n", functionCall.Name, params)
 		return handleFunction("end_conversation", functionCall.Arguments, "end_conversation.json")
-	case "call_emergency":
-		log.Printf("Function call: %s, %s", functionCall.Name, functionCall.Arguments)
 	default:
-		log.Printf("Unknown function call: %s", functionCall.Name)
+		argument, err := makePretty(functionCall.Arguments)
+		if err != nil {
+			log.Println(err)
+			return err
+		}
+		log.Printf("Unknown function call: %s, %s", functionCall.Name, argument)
 	}
 	return nil
 }

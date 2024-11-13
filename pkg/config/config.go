@@ -16,5 +16,4 @@ func init() {
 	OpenaiApiKey = os.Getenv("OPENAI_API_KEY")
 	ClovaSpeechUrl = "https://clovaspeech-gw.ncloud.com/recog/v1/stt"
 	ClovaSpeechApiKey = os.Getenv("CLOVA_SPEECH_API_KEY")
-
 }
